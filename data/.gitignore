@@ -1,0 +1,26 @@
+# DevDocs cache and local documentation files
+# Downloaded documentation should not be committed to git
+# Downloaded documentation datasets
+*
+*.json
+!package.json
+!tsconfig.json
+!.gitignore
+!tsconfig.build.json
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node modules (if any installed here)
+node_modules/
+!.gitignore# DevDocs cache and local documentation files
