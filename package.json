@@ -1,6 +1,6 @@
 {
   "name": "@madhan-g-p/devdocs-mcp-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "mcpName":"io.github.madhan-g-p/DevDocs-MCP",
   "repository": {
     "type": "git",
