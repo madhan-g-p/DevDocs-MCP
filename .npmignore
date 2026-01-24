@@ -1,0 +1,120 @@
+################################################################################
+# TESTING FILES (Exclude test files, but keep source code)
+################################################################################
+tests/                     # Test files
+__tests__/                 # Additional test directory
+*.test.ts                  # Test files
+*.spec.ts                  # Spec files
+jest.config.js             # Jest configuration
+.jest/                     # Jest cache
+test-results/              # Test results
+__snapshots__/             # Jest snapshots
+
+################################################################################
+# SOURCE CODE (INCLUDED for open-source developers)
+################################################################################
+# src/                     # ✅ INCLUDE - Developers can read, modify, patch
+# See DEVELOPER_EXPERIENCE.md for usage with patch-package
+
+################################################################################
+# BUILD CONFIGURATION
+################################################################################
+tsconfig.json              # Base TypeScript config
+tsconfig.esm.json          # ESM TypeScript config
+tsconfig.cjs.json          # CJS TypeScript config
+.eslintrc.cjs              # ESLint configuration
+.prettierrc                 # Prettier configuration
+.prettierignore            # Prettier ignore file
+.gitignore                 # Git ignore file
+.editorconfig              # Editor config
+
+################################################################################
+# BUILD SCRIPTS & TOOLS (exclude - only needed for development)
+################################################################################
+scripts/                   # ❌ EXCLUDE - Build automation (not needed for consumers)
+.dist-backup/              # ❌ EXCLUDE - Temporary backup folder
+.build.log                 # ❌ EXCLUDE - Build log file (temporary)
+
+################################################################################
+# DOCUMENTATION (Developer-Focused)
+################################################################################
+# Keep all .md files (valuable for developers)
+# ✅ README.md              - Package overview
+# ✅ LICENSE                - License information
+# ✅ CONTRIBUTING.md        - How to contribute
+# ✅ BUILD_SYSTEM.md        - Build documentation
+# ✅ DEVELOPER_EXPERIENCE.md - Developer tips & tricks
+# ✅ GIT_NPM_GUIDE.md       - Git/NPM workflow
+docs/                      # Generated docs (can be regenerated)
+
+################################################################################
+# DEVELOPMENT & IDE
+################################################################################
+.vscode/                   # VS Code settings
+.idea/                     # IntelliJ settings
+.DS_Store                  # macOS files
+Thumbs.db                  # Windows files
+*.swp                      # Vim swap files
+*.swo                      # Vim swap files
+*~                         # Temporary files
+.editorconfig              # Editor configuration
+
+################################################################################
+# GIT
+################################################################################
+.git/                      # Git repository
+.gitignore                 # Git ignore file
+.gitattributes             # Git attributes
+.github/                   # GitHub workflows & config
+
+################################################################################
+# BUILD OUTPUTS TO EXCLUDE
+################################################################################
+coverage/                  # Test coverage reports
+.nyc_output/               # nyc coverage output
+*.log                      # Log files
+node_modules/              # Dependencies (installed fresh)
+npm-debug.log*             # npm debug logs
+yarn-debug.log*            # yarn debug logs
+yarn-error.log*            # yarn error logs
+
+################################################################################
+# ENVIRONMENT VARIABLES (SENSITIVE)
+################################################################################
+.env                       # Environment variables
+.env.local                 # Local environment variables
+.env.*.local               # Environment-specific variables
+
+################################################################################
+# PACKAGE MANAGER LOCK FILES
+################################################################################
+# Keep package-lock.json OR yarn.lock (not both)
+# Uncomment the one you DON'T use:
+# yarn.lock
+# package-lock.json
+
+################################################################################
+# CI/CD
+################################################################################
+.github/workflows/         # GitHub Actions (optional: keep if relevant to users)
+.travis.yml                # Travis CI config
+.circleci/                 # CircleCI config
+Jenkinsfile                # Jenkins config
+
+################################################################################
+# MISC
+################################################################################
+.npmrc                     # NPM configuration
+.nvmrc                     # Node version file
+.node-version              # Node version file
+.tool-versions             # Tool versions file
+SETUP_SUMMARY.md           # Setup documentation
+BUILD_SYSTEM.md            # Build system documentation
+CONTRIBUTING.md            # Contribution guidelines (optional)
+CODE_OF_CONDUCT.md         # Code of conduct (optional)
+.gitignore
+
+# Other
+*.log
+.nyc_output
+scripts

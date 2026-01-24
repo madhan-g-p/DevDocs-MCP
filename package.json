@@ -1,7 +1,20 @@
 {
-  "name": "devdocs-mcp-server",
+  "name": "@madhan-g-p/devdocs-mcp-server",
   "version": "1.0.0",
-  "description": "Local DevDocs MCP Server",
+  "mcpName":"io.github.madhan-g-p/DevDocs-MCP",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/madhan-g-p/DevDocs-MCP.git"
+
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "devdocs",
+    "developer-docs",
+    "context-aware-docs"
+  ],
+  "description": "Local DevDocs MCP Server (Developer Docs with project specific context awareness)",
   "author": "Madhan (https://github.com/madhan-g-p)",
   "private": false,
   "license": "MIT",
@@ -21,6 +34,13 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "homepage": "https://github.com/madhan-g-p/DevDocs-MCP?tab=readme-ov-file",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.2",
     "@nestjs/common": "^10.0.0",

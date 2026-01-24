@@ -3,6 +3,7 @@
 
 # Downloaded documentation datasets
 *.json
+!server.json
 !package.json
 !tsconfig.json
 !.gitignore
