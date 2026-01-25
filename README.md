@@ -1,5 +1,22 @@
 # DevDocs-MCP:  Documentation Authority for AI Agents
 
+<table>
+<tbody width="100%" style="margin: 0 auto;">
+<tr>
+<td width="50%">
+<a href="https://glama.ai/mcp/servers/@madhan-g-p/devdocs-mcp">
+  <img height="180" src="https://glama.ai/mcp/servers/@madhan-g-p/devdocs-mcp/badge" />
+</a>
+</td>
+<td width="50%">
+<a href="https://registry.modelcontextprotocol.io/?q=io.github.madhan-g-p%2Fdevdocs-mcp">
+  <img height="180" src="./mcp_registry.png" />
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+
 > **Eliminate AI hallucinations with local, version-aware, and authoritative documentation.**
 
   DevDocs-MCP is a Model Context Protocol (MCP) server that provides version-pinned, deterministic documentation sourced from [DevDocs.io](https://devdocs.io) to AI assistants (Claude, RooCode, Cline, Copilot etc.). It acts as a local Documentation Intelligence Layer, ensuring your agent always has the correct API context without network latency or training data drift. 
