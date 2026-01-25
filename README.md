@@ -1,14 +1,14 @@
 # DevDocs-MCP:  Documentation Authority for AI Agents
 
-<table>
+<table width="100%">
 <tbody width="100%" style="margin: 0 auto;">
 <tr>
-<td width="50%">
+<td width="50%" align="center">
 <a href="https://glama.ai/mcp/servers/@madhan-g-p/devdocs-mcp">
   <img height="180" src="https://glama.ai/mcp/servers/@madhan-g-p/devdocs-mcp/badge" />
 </a>
 </td>
-<td width="50%">
+<td width="50%" align="center">
 <a href="https://registry.modelcontextprotocol.io/?q=io.github.madhan-g-p%2Fdevdocs-mcp">
   <img height="180" src="./mcp_registry.png" />
 </a>
