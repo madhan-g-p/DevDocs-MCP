@@ -1,0 +1,30 @@
+# Git
+.git
+.gitignore
+
+# NodeJS
+node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Build output
+dist
+
+# VSCode
+.vscode
+
+# Environment
+.env
+.env.local
+
+# Data and Database (User specific)
+mcp.db
+mcp.db-shm
+mcp.db-wal
+data
+*.db
+
+# OS
+.DS_Store
+Thumbs.db

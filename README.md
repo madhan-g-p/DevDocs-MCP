@@ -121,6 +121,22 @@ DevDocs-MCP is optimized for zero-fuss setup with `pnpm`. It is a **Node-only** 
 
 - Node.js 18+ (tested on 18.x and 20.x).
 
+### 🐳 Docker Usage
+
+Each user's documentation data is persistent and stored locally on their machine.
+
+1.  **Run the Server (SSE Mode)**:
+    ```bash
+    docker run -d -p 3000:3000 \
+      -v "$(pwd)/data:/app/data" \
+      -e PORT=3000 \
+      madhandock1/devdocs-mcp:latest
+    ```
+    *This maps your local `./data` folder to the container, ensuring your downloaded docs are saved.*
+
+2.  **Configure Agent**:
+    - **SSE URL**: `http://localhost:3000/mcp/sse`
+
 ### Configuration (`.env`)
 
 | Variable | Description | Default |
