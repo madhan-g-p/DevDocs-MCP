@@ -1,50 +1,46 @@
-# Build Stage
-FROM node:20-slim AS builder
-
-# Enable pnpm
+# STAGE 1: Build Stage (Node 24 is recommended for 2026 compatibility)
+FROM node:24-slim AS builder
+WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
-WORKDIR /app
-
-# Copy dependency definitions
-COPY package.json pnpm-lock.yaml ./
-
-# Install dependencies
+COPY package.json pnpm-lock.yaml* ./
 RUN pnpm install --frozen-lockfile
-
-# Copy source code
 COPY . .
-
-# Build the application
 RUN pnpm run build
 
-# Prune dev dependencies
-RUN pnpm prune --prod
+# --- CRITICAL FIX FOR DIRECTORIES ---
+# Create the data directory here while we have a shell
+RUN mkdir -p data/docs && chown -R 65532:65532 data
 
-# Production Stage
-FROM node:20-slim
+# Prune dependencies
+RUN rm -rf node_modules && pnpm install --prod --frozen-lockfile --ignore-scripts
+
+
+# STAGE 2: Runner Stage
+FROM cgr.dev/chainguard/node:latest-slim AS runner
 
 WORKDIR /app
-
-# Copy built artifacts and dependencies
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./
-
-# Create data directory for volume mounting
-RUN mkdir -p data
-
-# Define volume for persistent data
-VOLUME ["/app/data"]
-
-# Set environment variables
 ENV NODE_ENV=production
-ENV DEVDOCS_DATA_PATH=./data
-ENV MCP_DB_PATH=./data/mcp.db
+ENV PORT=3000
+ENV DEVDOCS_DATA_PATH=/app/data/docs
+ENV MCP_DB_PATH=/app/data/mcp.db
 
-# Expose port 3000 for SSE mode
+# Copy artifacts with --chown to avoid needing 'RUN chown' in the final stage
+# Note: 65532 is the UID/GID for the 'node' user in Chainguard images
+COPY --from=builder --chown=65532:65532 /app/node_modules ./node_modules
+COPY --from=builder --chown=65532:65532 /app/dist ./dist
+COPY --from=builder --chown=65532:65532 /app/package.json ./
+# We copy the already-prepared data directory from builder
+COPY --from=builder --chown=65532:65532 /app/data ./data
+
+# Switch to the non-root 'node' user immediately
+USER node
+
 EXPOSE 3000
 
-# Default command starts in Prod mode with HTTP server if PORT is set, or Stdio if not.
-# By default, we can set it to run node dist/main.js
-CMD ["node", "dist/main.js"]
+# Healthcheck without a shell
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+  CMD ["node", "-e", "fetch('http://localhost:3000/mcp/sse').then(r => r.ok ? process.exit(0) : process.exit(1)).catch(() => process.exit(1))"]
+
+# Use absolute path for safety in distroless
+ENTRYPOINT ["/usr/bin/node", "dist/main.js"]

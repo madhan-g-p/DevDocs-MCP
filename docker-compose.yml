@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  devdocs:
+    build: .
+    image: devdocs-mcp:latest
+    container_name: devdocs-mcp
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      # Allows 3 modes based on .env:
+      # 1. Named volume (default): DEVDOCS_VOLUME_SOURCE=devdocs_data
+      # 2. Host path: DEVDOCS_VOLUME_SOURCE=./my-data
+      # 3. Existing volume: DEVDOCS_VOLUME_SOURCE=existing_vol
+      - ${DEVDOCS_VOLUME_SOURCE:-devdocs_data}:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://localhost:3000/mcp/sse').then(r => r.ok ? process.exit(0) : process.exit(1)).catch(() => process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  devdocs_data:
+    name: devdocs_data

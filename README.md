@@ -5,7 +5,7 @@
 <tr>
 <td width="50%" align="center">
 <a href="https://glama.ai/mcp/servers/@madhan-g-p/devdocs-mcp">
-  <img height="180" src="https://glama.ai/mcp/servers/@madhan-g-p/devdocs-mcp/badge" />
+  <img height="130" src="https://glama.ai/mcp/servers/@madhan-g-p/devdocs-mcp/badge" />
 </a>
 </td>
 <td width="50%" align="center">
@@ -140,19 +140,43 @@ DevDocs-MCP is optimized for zero-fuss setup with `pnpm`. It is a **Node-only** 
 
 ### 🐳 Docker Usage
 
-Each user's documentation data is persistent and stored locally on their machine.
+DevDocs-MCP is designed to be lightweight and persistent. Since it downloads and caches large documentation datasets, managing your data volumes correctly is essential.
 
-1.  **Run the Server (SSE Mode)**:
+#### Method A: Docker Compose (Dynamic & Persistent)
+This is the recommended way. It supports 3 storage modes via the `DEVDOCS_VOLUME_SOURCE` variable in your `.env` file.
+
+1.  **Configure your preferred storage** in `.env`:
     ```bash
-    docker run -d -p 3000:3000 \
-      -v "$(pwd)/data:/app/data" \
-      -e PORT=3000 \
-      madhandock1/devdocs-mcp:latest
-    ```
-    *This maps your local `./data` folder to the container, ensuring your downloaded docs are saved.*
+    # Mode 1: Named volume (Default - Docker manages it)
+    DEVDOCS_VOLUME_SOURCE=devdocs_data
 
-2.  **Configure Agent**:
-    - **SSE URL**: `http://localhost:3000/mcp/sse`
+    # Mode 2: Host Path (Outside Docker - Local folder)
+    # DEVDOCS_VOLUME_SOURCE=./my-docs-storage
+    ```
+
+2.  **Start the server**:
+    ```bash
+    docker compose up -d
+    ```
+
+> **Flexibility**: Every time you start the container, you can point to a **new volume** (to start fresh) or an **existing volume** (to keep your data) just by changing the `DEVDOCS_VOLUME_SOURCE` in your `.env` file. Both the `mcp.db` (database library) and the `data/` (documentation downloads) are stored inside this volume.
+
+#### Method B: Docker Run (Manual)
+If you just want to run the public image directly from Docker Hub:
+
+```bash
+docker run -d -p 3000:3000 \
+  -v "devdocs_data:/app/data" \
+  --name devdocs-mcp \
+  madhandock1/devdocs-mcp:latest
+```
+
+#### 💾 Data Strategy
+The project uses a single mount point at `/app/data` which contains:
+- `/app/data/mcp.db`: The SQLite registry.
+- `/app/data/docs/`: The cached documentation files.
+This unified structure makes it easy to backup or move your entire documentation authority by simply moving one folder or volume.
+
 
 ### Configuration (`.env`)
 
