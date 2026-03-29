@@ -247,3 +247,8 @@ If you need to expose the server via a port (for production/remote setups):
 ---
 *Inspired from this project [devdocs-local](https://github.com/whiteinge/dotfiles/blob/master/bin/devdocs-local) ,
 [devdocs-local-demo](https://eseth.org/2020/devdocs-cli.html) by [@Nathaniel Whiteinge](https://github.com/whiteinge)*
+
+## Hosted deployment
+
+A hosted deployment is available on [Fronteir AI](https://fronteir.ai/mcp/madhan-g-p-devdocs-mcp).
+
