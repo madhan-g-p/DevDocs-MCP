@@ -1,5 +1,5 @@
 # STAGE 1: Build Stage (Node 24 is recommended for 2026 compatibility)
-FROM node:24-slim AS builder
+FROM node:25-slim AS builder
 WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
